@@ -1,0 +1,18 @@
+language: php
+sudo: false
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/symfony-bridge/.phpunit
+warnings_are_errors: true
+services:
+  - mysql
+php:
+  - 7.4
+install:
+  - composer install --prefer-dist --no-interaction --dev
+  - php bin/console doctrine:database:create --env=test
+  - php bin/console doctrine:schema:update --force --env=test
+  - php bin/console doctrine:fixtures:load -n --env=test
+script:
+  - ./vendor/bin/simple-phpunit --colors
