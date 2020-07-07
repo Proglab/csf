@@ -26,6 +26,8 @@ see [CONTRIBUTING](./CONTRIBUTING.md)
 * Module management.
 * Mail management.
 * Translation management.
+* Static pages.
+* Menus.
 
 ### What is a module
 
@@ -41,7 +43,6 @@ see [CONTRIBUTING](./CONTRIBUTING.md)
 ### additionnal module proposition
 
 * Blog.
-* Static website.
 * Wiki.
 * Forum.
 * Newsletter.
