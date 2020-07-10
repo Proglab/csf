@@ -54,3 +54,5 @@
 # PHPStorm
 /.idea/
 
+.env.local
+
