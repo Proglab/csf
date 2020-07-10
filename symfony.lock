@@ -172,6 +172,18 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "71599f5b0fdeeeec0fb90e9b17c85e6f5e1350c1"
+        },
+        "files": [
+            "./public/.htaccess"
+        ]
+    },
     "symfony/asset": {
         "version": "v5.0.8"
     },
@@ -399,6 +411,9 @@
     "symfony/polyfill-php80": {
         "version": "v1.17.1"
     },
+    "symfony/polyfill-uuid": {
+        "version": "v1.17.1"
+    },
     "symfony/process": {
         "version": "v5.0.8"
     },
@@ -503,6 +518,9 @@
     "symfony/twig-pack": {
         "version": "v1.0.0"
     },
+    "symfony/uid": {
+        "version": "v5.1.2"
+    },
     "symfony/validator": {
         "version": "4.3",
         "recipe": {
@@ -541,6 +559,9 @@
     },
     "symfony/yaml": {
         "version": "v5.0.8"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.0.0"
     },
     "twig/extra-bundle": {
         "version": "v3.0.3"
