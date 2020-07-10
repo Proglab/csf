@@ -51,6 +51,8 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    private $plainPassword;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -125,8 +127,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstname(): ?string
@@ -161,6 +162,24 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->getFirstname().' '.$this->getLastname();
+    }
+
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $password): self
+    {
+        $this->plainPassword = $password;
 
         return $this;
     }
