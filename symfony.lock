@@ -109,6 +109,9 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
