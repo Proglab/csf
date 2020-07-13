@@ -34,6 +34,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToLogout('Logout', 'fa fa-fw fa-sign-out');
     }
 
+    /**
+     * @param User $user
+     */
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         // Usually it's better to call the parent method because that gives you a
@@ -44,8 +47,6 @@ class DashboardController extends AbstractDashboardController
             ->setName($user->getFullName())
             ->displayUserAvatar(false)
             // you can use any type of menu item, except submenus
-            ->addMenuItems([
-                MenuItem::section(),
-            ]);
+            ->addMenuItems([]);
     }
 }
