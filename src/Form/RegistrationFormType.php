@@ -23,13 +23,15 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Please enter a first name',
                     ]),
-                ]])
+                ],
+            ])
             ->add('lastname', null, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a last name',
                     ]),
-                ]])
+                ],
+            ])
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotBlank([
@@ -41,7 +43,7 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 254,
                     ]),
-                ]
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

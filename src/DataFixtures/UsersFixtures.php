@@ -2,14 +2,15 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UsersFixtures extends Fixture
 {
     private $userPasswordEncoder;
+
     public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
     {
         $this->userPasswordEncoder = $userPasswordEncoder;
@@ -17,8 +18,7 @@ class UsersFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        foreach($this->getDatas() as $data)
-        {
+        foreach ($this->getDatas() as $data) {
             $user = new User();
             $user->setFirstname($data['firstname']);
             $user->setLastname($data['lastname']);
