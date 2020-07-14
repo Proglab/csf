@@ -36,6 +36,16 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            // the labels used to refer to this entity in titles, buttons, etc.
+            ->setEntityLabelInSingular('User')
+            ->setEntityLabelInPlural('Users')
+            ->setEntityPermission('ROLE_ADMIN')
+            ;
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         return $actions

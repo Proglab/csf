@@ -39,3 +39,4 @@ security:
     role_hierarchy:
         ROLE_USER: IS_AUTHENTICATED_ANONYMOUSLY
         ROLE_ADMIN: ROLE_USER
+        ROLE_SUPERADMIN: ROLE_ADMIN

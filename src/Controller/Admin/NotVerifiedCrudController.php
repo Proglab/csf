@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -36,6 +35,16 @@ class NotVerifiedCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            // the labels used to refer to this entity in titles, buttons, etc.
+            ->setEntityLabelInSingular('User not verified')
+            ->setEntityLabelInPlural('Users not verified')
+            ->setEntityPermission('ROLE_ADMIN')
+            ;
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         $actions->disable(Action::NEW, Action::DELETE, Action::DETAIL)
@@ -48,30 +57,11 @@ class NotVerifiedCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('firstname')->hideOnIndex(),
-            TextField::new('lastname')->hideOnIndex(),
-            TextField::new('fullName')->hideOnForm(),
+            TextField::new('fullName'),
             EmailField::new('email'),
-            TextField::new('plainPassword', 'Password')->hideOnIndex(),
             ChoiceField::new('roles')->allowMultipleChoices(true)->setChoices(['ROLE_USER' => 'ROLE_USER', 'ROLE_ADMIN' => 'ROLE_ADMIN'])->setValue('ROLE_USER')->setPermission('ROLE_ADMIN'),
             BooleanField::new('isVerified'),
         ];
-    }
-
-    /**
-     * @param User $entityInstance
-     */
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if (!empty($entityInstance->getPlainPassword())) {
-            $entityInstance->setPassword(
-                $this->passwordEncoder->encodePassword(
-                    $entityInstance,
-                    $entityInstance->getPlainPassword()
-                )
-            );
-        }
-        parent::persistEntity($entityManager, $entityInstance);
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder

@@ -45,20 +45,36 @@ class UsersFixtures extends Fixture
     {
         return [
             [
+                'firstname' => 'Super',
+                'lastname' => 'Administrator',
+                'email' => 'superadmin@csf.com',
+                'password' => 'superadmin',
+                'roles' => ['ROLE_SUPERADMIN'],
+                'isVerified' => 1,
+            ],
+            [
                 'firstname' => 'Admin',
                 'lastname' => 'istrator',
-                'email' => 'info@proglab.com',
+                'email' => 'admin@csf.com',
                 'password' => 'admin',
                 'roles' => ['ROLE_ADMIN'],
                 'isVerified' => 1,
             ],
             [
-                'firstname' => 'basic',
-                'lastname' => 'user',
-                'email' => 'manu@absolute-fx.com',
+                'firstname' => 'Basic',
+                'lastname' => 'User',
+                'email' => 'user@csf.com',
                 'password' => 'user',
                 'roles' => ['ROLE_USER'],
                 'isVerified' => 1,
+            ],
+            [
+                'firstname' => 'Not',
+                'lastname' => 'verified',
+                'email' => 'notverified@csf.com',
+                'password' => 'notverified',
+                'roles' => ['ROLE_USER'],
+                'isVerified' => 0,
             ],
         ];
     }

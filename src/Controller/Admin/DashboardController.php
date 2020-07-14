@@ -34,6 +34,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::subMenu('Users', 'fa fa-users')->setSubItems([
                 MenuItem::linkToCrud('User', 'fa fa-user', User::class)->setController(UserCrudController::class),
                 MenuItem::linkToCrud('Admin', 'fa fa-user-shield', User::class)->setController(AdminCrudController::class)->setPermission('ROLE_ADMIN'),
+                MenuItem::linkToCrud('Super Admin', 'fa fa-user-shield', User::class)->setController(SuperAdminCrudController::class)->setPermission('ROLE_SUPERADMIN'),
                 MenuItem::linkToCrud('Not verified', 'fa fa-user-times', User::class)->setController(NotVerifiedCrudController::class)->setPermission('ROLE_ADMIN'),
             ]),
             MenuItem::linkToLogout('Logout', 'fa fa-fw fa-sign-out'),
