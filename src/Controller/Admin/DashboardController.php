@@ -29,9 +29,15 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
-        yield MenuItem::linkToLogout('Logout', 'fa fa-fw fa-sign-out');
+        return [
+            MenuItem::linktoDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::subMenu('Users', 'fa fa-users')->setSubItems([
+                MenuItem::linkToCrud('User', 'fa fa-user', User::class)->setController(UserCrudController::class),
+                MenuItem::linkToCrud('Admin', 'fa fa-user-shield', User::class)->setController(AdminCrudController::class)->setPermission('ROLE_ADMIN'),
+                MenuItem::linkToCrud('Not verified', 'fa fa-user-times', User::class)->setController(NotVerifiedCrudController::class)->setPermission('ROLE_ADMIN'),
+            ]),
+            MenuItem::linkToLogout('Logout', 'fa fa-fw fa-sign-out'),
+        ];
     }
 
     /**

@@ -62,6 +62,11 @@ class User implements UserInterface
      */
     private $plainPassword;
 
+    public function __construct()
+    {
+        $this->setRoles($this->getRoles());
+    }
+
     public function getId(): ?int
     {
         return $this->id;

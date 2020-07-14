@@ -45,7 +45,6 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -90,8 +89,7 @@ class RegistrationController extends AbstractController
          */
         $user = $this->getUser();
         $this->emailVerifier->handleEmailConfirmation($request, $user);
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
-        return $this->redirectToRoute('login');
+        return $this->redirectToRoute('app_login');
     }
 }
