@@ -1,0 +1,22 @@
+App\Entity\User:
+  user_superadmin:
+      firstname: 'Super'
+      lastname: 'Administrator'
+      email: 'superadmin@csf.com'
+      password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$WlJSTTRIbEh3LjczRnR6dw\$wOGcIasXjAVfM2gTI+2yAlABGaTgxvGYrszNelv0N7k'
+      roles: ['ROLE_SUPERADMIN']
+      isVerified: 1
+  user_admin:
+      firstname: 'Admin'
+      lastname: 'istrator'
+      email: 'admin@csf.com'
+      password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$cndFS0lrY0xsTUpUZXdzTQ\$f0NfZE7ikrYDqwa2PGywnU7c6iWcTFUuXgIxyyj/nBw'
+      roles: ['ROLE_ADMIN']
+      isVerified: 1
+  user_user:
+      firstname: 'Basic'
+      lastname: 'User'
+      email: 'user@csf.com'
+      password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$ai9HbnZYRFZBVHFYWmw3eg\$WFE6SAEg5liUnRmLxNlC6sC1v00Gp88RzhvNgnNXpgc'
+      roles: ['ROLE_USER']
+      isVerified: 1
