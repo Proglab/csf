@@ -90,7 +90,7 @@ class UserCrudController extends AbstractCrudController
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
-        return $queryBuilder->where('entity.roles LIKE :role')->setParameter('role', '%ROLE_USER%')->orWhere('entity.roles LIKE :null')->setParameter('null', '[]')->andWhere('entity.isVerified = 1');
 
+        return $queryBuilder->where('entity.roles LIKE :role')->setParameter('role', '%ROLE_USER%')->orWhere('entity.roles LIKE :null')->setParameter('null', '[]')->andWhere('entity.isVerified = 1');
     }
 }

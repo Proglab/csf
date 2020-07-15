@@ -17,18 +17,21 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
      * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
      * @var string
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     *
      * @var array<string>
      */
     private $roles = [];
@@ -41,18 +44,21 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @var string
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @var string
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="boolean")
+     *
      * @var bool
      */
     private $isVerified = false;
@@ -62,9 +68,24 @@ class User implements UserInterface
      */
     private $plainPassword;
 
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     *
+     * @var \DateTimeImmutable
+     */
+    private $createdDt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $last_connection;
+
     public function __construct()
     {
         $this->setRoles($this->getRoles());
+        $this->createdDt = new \DateTimeImmutable('now');
     }
 
     public function getId(): ?int
@@ -108,6 +129,7 @@ class User implements UserInterface
 
     /**
      * @param array<string> $roles
+     *
      * @return User
      */
     public function setRoles(array $roles): self
@@ -197,6 +219,30 @@ class User implements UserInterface
     public function setPlainPassword(string $password): self
     {
         $this->plainPassword = $password;
+
+        return $this;
+    }
+
+    public function getCreatedDt(): ?\DateTimeImmutable
+    {
+        return $this->createdDt;
+    }
+
+    public function setCreatedDt(\DateTimeImmutable $createdDt): self
+    {
+        $this->createdDt = $createdDt;
+
+        return $this;
+    }
+
+    public function getLastConnection(): ?\DateTimeInterface
+    {
+        return $this->last_connection;
+    }
+
+    public function setLastConnection(?\DateTimeInterface $last_connection): self
+    {
+        $this->last_connection = $last_connection;
 
         return $this;
     }
