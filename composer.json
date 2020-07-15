@@ -36,11 +36,14 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "friendsofphp/php-cs-fixer": "^2.16",
         "fzaninotto/faker": "^1.9",
+        "liip/test-fixtures-bundle": "^1.9",
         "phpstan/phpstan": "^0.12.32",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^5.1",
         "symfony/profiler-pack": "*",
-        "symfony/test-pack": "^1.0"
+        "symfony/test-pack": "^1.0",
+        "theofidry/alice-data-fixtures": "^1.2"
     },
     "config": {
         "preferred-install": {

@@ -2,9 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Nelmio\Alice\Loader\NativeLoader;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UsersFixtures extends Fixture
@@ -21,61 +21,19 @@ class UsersFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach ($this->getDatas() as $data) {
-            $user = new User();
-            $user->setFirstname($data['firstname']);
-            $user->setLastname($data['lastname']);
-            $user->setEmail($data['email']);
+        $loader = new NativeLoader();
+        $objectSet = $loader->loadFile(__DIR__.'/UsersFixtures.yaml');
+        foreach ($objectSet->getObjects() as $user) {
+
             $user->setPassword($this->userPasswordEncoder->encodePassword(
                 $user,
-                $data['password']
+                $user->getPlainPassword()
             ));
-            $user->setRoles($data['roles']);
-            $user->setIsVerified($data['isVerified']);
+
             $manager->persist($user);
         }
-
         $manager->flush();
     }
-
-    /**
-     * @return array<array>
-     */
-    public function getDatas(): array
-    {
-        return [
-            [
-                'firstname' => 'Super',
-                'lastname' => 'Administrator',
-                'email' => 'superadmin@csf.com',
-                'password' => 'superadmin',
-                'roles' => ['ROLE_SUPERADMIN'],
-                'isVerified' => 1,
-            ],
-            [
-                'firstname' => 'Admin',
-                'lastname' => 'istrator',
-                'email' => 'admin@csf.com',
-                'password' => 'admin',
-                'roles' => ['ROLE_ADMIN'],
-                'isVerified' => 1,
-            ],
-            [
-                'firstname' => 'Basic',
-                'lastname' => 'User',
-                'email' => 'user@csf.com',
-                'password' => 'user',
-                'roles' => ['ROLE_USER'],
-                'isVerified' => 1,
-            ],
-            [
-                'firstname' => 'Not',
-                'lastname' => 'verified',
-                'email' => 'notverified@csf.com',
-                'password' => 'notverified',
-                'roles' => ['ROLE_USER'],
-                'isVerified' => 0,
-            ],
-        ];
-    }
 }
+
+
