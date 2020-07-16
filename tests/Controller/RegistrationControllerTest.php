@@ -46,6 +46,7 @@ class RegistrationControllerTest extends WebTestCase
     public function testRegistrationSuccess()
     {
         $client = static::createClient();
+        $client->enableProfiler();
         $crawler = $client->request('GET', '/register');
         $form = $crawler->selectButton('Register')->form([
             'registration_form[firstname]' => 'firstname',
@@ -55,6 +56,9 @@ class RegistrationControllerTest extends WebTestCase
             'registration_form[agreeTerms]' => 1,
         ]);
         $client->submit($form);
+
+        $mailCollector = $client->getProfile()->getCollector('swiftmailer');
+        $this->assertSame(1, $mailCollector->getMessageCount());
         $this->assertResponseRedirects('/admin');
     }
 }
