@@ -54,6 +54,8 @@ class DashboardController extends AbstractDashboardController
             ->setName($user->getFullName())
             ->displayUserAvatar(false)
             // you can use any type of menu item, except submenus
-            ->addMenuItems([]);
+            ->addMenuItems([
+                MenuItem::linkToCrud('Profile', 'fa fa-user-circle', User::class)->setController(ProfileCrudController::class)->setAction('edit')->setEntityId($this->getUser()->getId()),
+            ]);
     }
 }
