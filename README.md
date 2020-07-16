@@ -1,4 +1,4 @@
-# Challenge Symfony Friendly (CSF)
+# Challenge Symfony Friendly (CSF) [![Build Status](https://travis-ci.org/Proglab/csf.svg?branch=master)](https://travis-ci.org/Proglab/csf)
 
 This challenge is to make a Wordpress like.
 
