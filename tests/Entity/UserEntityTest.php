@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Tests\Entity;
 
 use App\DataFixtures\UsersFixtures;
@@ -22,6 +23,7 @@ class UserEntityTest extends KernelTestCase
         $user->setPassword('312312546');
         $user->setEmail('fabrice@proglab.com');
         $user->setRoles(['ROLE_USER']);
+
         return $user;
     }
 
@@ -32,6 +34,7 @@ class UserEntityTest extends KernelTestCase
         foreach ($errors as $error) {
             $messages[] = $error->getPropertyPath().' => '.$error->getMessage();
         }
+
         return implode("\n", $messages);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Tests\Admin;
 
 use App\Tests\NeedLogin;
