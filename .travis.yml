@@ -1,15 +1,17 @@
 language: php
-sudo: false
 cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/symfony-bridge/.phpunit
-    - ./bin/.phpunit
 warnings_are_errors: true
 services:
   - mysql
 php:
   - 7.4
+
+before_install:
+  - composer self-update
+  - phpenv config-rm xdebug.ini
 
 install:
   - composer install --prefer-dist --no-interaction --dev
@@ -17,10 +19,10 @@ install:
   - php bin/console doctrine:schema:update --force --env=test
   - php bin/console doctrine:fixtures:load -n --env=test
 
-before_script:
-  - phpenv config-rm xdebug.ini
-
 script:
-  - ./vendor/bin/simple-phpunit --colors
+  - phpdbg -qrr -d memory_limit=-1 ./vendor/bin/simple-phpunit --colors  --coverage-clover=coverage.xml
   - ./vendor/bin/phpstan analyse src --level=6
   - ./vendor/bin/php-cs-fixer fix ./src --diff --diff-format=udiff --dry-run --no-interaction --ansi --rules=@Symfony
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
