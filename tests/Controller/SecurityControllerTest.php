@@ -1,10 +1,15 @@
 <?php
 namespace App\Tests\Controller;
 
+use App\Tests\NeedLogin;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
+    use NeedLogin;
+    use FixturesTrait;
+
     public function testLoginPage()
     {
         $client = static::createClient();
@@ -39,4 +44,34 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseRedirects('/admin');
     }
 
+    public function testProfilePageLoggedUser()
+    {
+        $client = static::createClient();
+        $users = $this->loadFixtureFiles([__DIR__.'\..\Admin\UsersFixtures.yaml']);
+        $this->login($client, $users['user_superadmin']);
+        $client->request('GET', '/profile');
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertSelectorNotExists('.alert.alert-danger');
+    }
+
+    public function testProfilePageNoLoggedUser()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/profile');
+        $this->assertResponseRedirects('/login');
+    }
+
+    public function testProfileUpdateMailAlreadyExist()
+    {
+        $client = static::createClient();
+        $users = $this->loadFixtureFiles([__DIR__.'\..\Admin\UsersFixtures.yaml']);
+
+        $this->login($client, $users['user_superadmin']);
+        $crawler = $client->request('GET', '/profile');
+        $form = $crawler->selectButton('Update')->form([
+            'profile_form[email]' => 'admin@csf.com',
+        ]);
+        $client->submit($form);
+        $this->assertSelectorExists('.alert.alert-danger');
+    }
 }
