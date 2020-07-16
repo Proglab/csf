@@ -56,6 +56,7 @@ class ProfileCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $actions->disable(Action::NEW, Action::DELETE, Action::DETAIL, Crud::PAGE_INDEX);
+
         return $actions;
     }
 
@@ -110,6 +111,7 @@ class ProfileCrudController extends AbstractCrudController
 
                 return $this->redirect($url);
             }
+
             return $this->redirectToRoute($context->getDashboardRouteName());
         }
 
@@ -132,6 +134,7 @@ class ProfileCrudController extends AbstractCrudController
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+
         return $queryBuilder->where('entity.id = :id')->setParameter('id', $this->getUser()->getId());
     }
 }

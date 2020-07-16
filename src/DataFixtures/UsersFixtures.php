@@ -24,7 +24,6 @@ class UsersFixtures extends Fixture
         $loader = new NativeLoader();
         $objectSet = $loader->loadFile(__DIR__.'/UsersFixtures.yaml');
         foreach ($objectSet->getObjects() as $user) {
-
             $user->setPassword($this->userPasswordEncoder->encodePassword(
                 $user,
                 $user->getPlainPassword()
@@ -35,5 +34,3 @@ class UsersFixtures extends Fixture
         $manager->flush();
     }
 }
-
-
