@@ -15,6 +15,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -31,7 +32,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, \Swift_Mailer $mailer, VerifyEmailHelperInterface $helper): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -49,14 +50,30 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('info@proglab.com', 'Proglab'))
-                    ->to(new Address((string) $user->getEmail(), $user->getFullName()))
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            $signatureComponents = $helper->generateSignature(
+                'app_verify_email',
+                (string) $user->getId(),
+                (string) $user->getEmail()
             );
+
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('info@proglab.com', 'Proglab')
+                ->setTo($user->getEmail(), $user->getFullName())
+                ->setSubject('Please Confirm your Email')
+                ->setBody(
+                    $this->renderView(
+                    // templates/emails/registration.html.twig
+                        'registration/confirmation_email.html.twig',
+                        [
+                            'signedUrl' => $signatureComponents->getSignedUrl(),
+                            'expiresAt' => $signatureComponents->getExpiresAt(),
+                        ]
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($message);
 
             $response = $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
