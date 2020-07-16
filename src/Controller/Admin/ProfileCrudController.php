@@ -25,6 +25,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileCrudController extends AbstractCrudController
@@ -75,7 +76,9 @@ class ProfileCrudController extends AbstractCrudController
     public function edit(AdminContext $context)
     {
         $event = new BeforeCrudActionEvent($context);
-        $this->get('event_dispatcher')->dispatch($event);
+        /** @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $this->get('event_dispatcher');
+        $eventDispatcher->dispatch($event);
         if ($event->isPropagationStopped()) {
             return $event->getResponse();
         }
@@ -88,23 +91,26 @@ class ProfileCrudController extends AbstractCrudController
             throw new InsufficientEntityPermissionException($context);
         }
 
-        $this->get(EntityFactory::class)->processFields($context->getEntity(), FieldCollection::new($this->configureFields(Crud::PAGE_EDIT)));
-        $this->get(EntityFactory::class)->processActions($context->getEntity(), $context->getCrud()->getActionsConfig());
+        /** @var EntityFactory $entityFactory */
+        $entityFactory = $this->get(EntityFactory::class);
+        $entityFactory->processFields($context->getEntity(), FieldCollection::new($this->configureFields(Crud::PAGE_EDIT)));
+        $entityFactory->processActions($context->getEntity(), $context->getCrud()->getActionsConfig());
         $entityInstance = $context->getEntity()->getInstance();
         $editForm = $this->createEditForm($context->getEntity(), $context->getCrud()->getEditFormOptions(), $context);
         $editForm->handleRequest($context->getRequest());
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $event = new BeforeEntityUpdatedEvent($entityInstance);
-            $this->get('event_dispatcher')->dispatch($event);
+            $eventDispatcher->dispatch($event);
             $entityInstance = $event->getEntityInstance();
-
             $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entityInstance);
 
-            $this->get('event_dispatcher')->dispatch(new AfterEntityUpdatedEvent($entityInstance));
+            $eventDispatcher->dispatch(new AfterEntityUpdatedEvent($entityInstance));
 
             $submitButtonName = $context->getRequest()->request->get('ea')['newForm']['btn'];
             if (Action::SAVE_AND_CONTINUE === $submitButtonName) {
-                $url = $this->get(CrudUrlGenerator::class)->build()
+                /** @var CrudUrlGenerator $crudUrlGenerator */
+                $crudUrlGenerator = $this->get(CrudUrlGenerator::class);
+                $url = $crudUrlGenerator->build()
                     ->setAction(Action::EDIT)
                     ->setEntityId($context->getEntity()->getPrimaryKeyValue())
                     ->generateUrl();
@@ -123,7 +129,7 @@ class ProfileCrudController extends AbstractCrudController
         ]));
 
         $event = new AfterCrudActionEvent($context, $responseParameters);
-        $this->get('event_dispatcher')->dispatch($event);
+        $eventDispatcher->dispatch($event);
         if ($event->isPropagationStopped()) {
             return $event->getResponse();
         }
@@ -134,7 +140,9 @@ class ProfileCrudController extends AbstractCrudController
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        /** @var User $user */
+        $user = $this->getUser();
 
-        return $queryBuilder->where('entity.id = :id')->setParameter('id', $this->getUser()->getId());
+        return $queryBuilder->where('entity.id = :id')->setParameter('id', $user->getId());
     }
 }

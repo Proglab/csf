@@ -51,7 +51,7 @@ class SecurityController extends AbstractController
      * @Route("/profile", name="user_profile")
      * @IsGranted("ROLE_USER")
      */
-    public function profile(Request $request)
+    public function profile(Request $request): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(ProfileFormType::class, $user);

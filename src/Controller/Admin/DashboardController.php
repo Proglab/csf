@@ -46,6 +46,8 @@ class DashboardController extends AbstractDashboardController
      */
     public function configureUserMenu(UserInterface $user): UserMenu
     {
+        /** @var User $user */
+        $user = $this->getUser();
         // Usually it's better to call the parent method because that gives you a
         // user menu with some menu items already created ("sign out", "exit impersonation", etc.)
         // if you prefer to create the user menu from scratch, use: return UserMenu::new()->...
@@ -55,7 +57,7 @@ class DashboardController extends AbstractDashboardController
             ->displayUserAvatar(false)
             // you can use any type of menu item, except submenus
             ->addMenuItems([
-                MenuItem::linkToCrud('Profile', 'fa fa-user-circle', User::class)->setController(ProfileCrudController::class)->setAction('edit')->setEntityId($this->getUser()->getId()),
+                MenuItem::linkToCrud('Profile', 'fa fa-user-circle', User::class)->setController(ProfileCrudController::class)->setAction('edit')->setEntityId($user->getId()),
             ]);
     }
 }
