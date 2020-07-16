@@ -20,7 +20,7 @@ class SecurityTest extends WebTestCase
     public function testAdminPAgeAccessToAuthenticatedUser()
     {
         $client = static::createClient();
-        $users = $this->loadFixtureFiles([__DIR__.'/UsersFixtures.yaml']);
+        $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
         $this->login($client, $users['user_admin']);
 
         $client->request('GET', '/admin');

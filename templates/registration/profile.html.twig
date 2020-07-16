@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {# For convenience sake of this snippet, store the errors in a variable #}
+    {% set formErrors = registrationForm.vars.errors.form.getErrors(true) %}
+
+    {# If there are errors in the form, display them in this unorganized list #}
+    {% if formErrors|length %}
+            {% for error in formErrors %}
+                <div class="alert alert-danger" role="alert">{{ error.message }}</div>
+            {% endfor %}
+    {% endif %}
+
+
+    {{ form_start(registrationForm) }}
+    {{ form_label(registrationForm.firstname) }}
+    {{ form_widget(registrationForm.firstname, {'attr': {'class': 'task_field'}}) }}
+    {{ form_label(registrationForm.lastname) }}
+    {{ form_widget(registrationForm.lastname, {'attr': {'class': 'task_field'}}) }}
+    {{ form_label(registrationForm.email) }}
+    {{ form_widget(registrationForm.email, {'attr': {'class': 'task_field'}}) }}
+
+        <button type="submit" class="btn">Update</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

@@ -47,7 +47,7 @@ class SecurityControllerTest extends WebTestCase
     public function testProfilePageLoggedUser()
     {
         $client = static::createClient();
-        $users = $this->loadFixtureFiles([__DIR__.'\..\Admin\UsersFixtures.yaml']);
+        $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
         $this->login($client, $users['user_superadmin']);
         $client->request('GET', '/profile');
         $this->assertResponseStatusCodeSame(200);
@@ -64,7 +64,7 @@ class SecurityControllerTest extends WebTestCase
     public function testProfileUpdateMailAlreadyExist()
     {
         $client = static::createClient();
-        $users = $this->loadFixtureFiles([__DIR__.'\..\Admin\UsersFixtures.yaml']);
+        $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
 
         $this->login($client, $users['user_superadmin']);
         $crawler = $client->request('GET', '/profile');
