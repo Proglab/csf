@@ -4,11 +4,13 @@ cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/symfony-bridge/.phpunit
+    - ./bin/.phpunit
 warnings_are_errors: true
 services:
   - mysql
 php:
   - 7.4
+
 install:
   - composer install --prefer-dist --no-interaction --dev
   - php bin/console doctrine:database:create --env=test
@@ -16,3 +18,5 @@ install:
   - php bin/console doctrine:fixtures:load -n --env=test
 script:
   - ./vendor/bin/simple-phpunit --colors
+  - ./vendor/bin/phpstan analyse src --level=6
+  - ./vendor/bin/php-cs-fixer fix ./src --diff --diff-format=udiff --dry-run --no-interaction --ansi --rules=@Symfony
