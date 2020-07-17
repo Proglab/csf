@@ -11,7 +11,7 @@ class SecurityControllerTest extends WebTestCase
     use NeedLogin;
     use FixturesTrait;
 
-    public function testLoginPage()
+    public function testLoginPage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/login');
@@ -19,7 +19,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorNotExists('.alert.alert-danger');
     }
 
-    public function testLoginBadCredentials()
+    public function testLoginBadCredentials(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/login');
@@ -33,7 +33,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorExists('.alert.alert-danger');
     }
 
-    public function testLoginSuccessFull()
+    public function testLoginSuccessFull(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/login');
@@ -45,7 +45,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseRedirects('/admin');
     }
 
-    public function testProfilePageLoggedUser()
+    public function testProfilePageLoggedUser(): void
     {
         $client = static::createClient();
         $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
@@ -55,14 +55,14 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorNotExists('.alert.alert-danger');
     }
 
-    public function testProfilePageNoLoggedUser()
+    public function testProfilePageNoLoggedUser(): void
     {
         $client = static::createClient();
         $client->request('GET', '/profile');
         $this->assertResponseRedirects('/login');
     }
 
-    public function testProfileUpdateMailAlreadyExist()
+    public function testProfileUpdateMailAlreadyExist(): void
     {
         $client = static::createClient();
         $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);

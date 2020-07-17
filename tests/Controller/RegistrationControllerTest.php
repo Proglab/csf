@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RegistrationControllerTest extends WebTestCase
 {
-    public function testRegisterPage()
+    public function testRegisterPage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/register');
@@ -14,7 +14,7 @@ class RegistrationControllerTest extends WebTestCase
         $this->assertSelectorNotExists('.alert.alert-danger');
     }
 
-    public function testRegistrationMailAlreadyExist()
+    public function testRegistrationMailAlreadyExist(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/register');
@@ -29,7 +29,7 @@ class RegistrationControllerTest extends WebTestCase
         $this->assertSelectorExists('.alert.alert-danger');
     }
 
-    public function testRegistrationPasswordTooShort()
+    public function testRegistrationPasswordTooShort(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/register');
@@ -44,7 +44,7 @@ class RegistrationControllerTest extends WebTestCase
         $this->assertSelectorExists('.alert.alert-danger');
     }
 
-    public function testRegistrationSuccess()
+    public function testRegistrationSuccess(): void
     {
         $client = static::createClient();
         $client->enableProfiler();
