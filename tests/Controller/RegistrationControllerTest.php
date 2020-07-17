@@ -60,6 +60,6 @@ class RegistrationControllerTest extends WebTestCase
 
         $mailCollector = $client->getProfile()->getCollector('swiftmailer');
         $this->assertSame(1, $mailCollector->getMessageCount());
-        $this->assertResponseRedirects('/admin');
+        $this->assertResponseRedirects('/');
     }
 }

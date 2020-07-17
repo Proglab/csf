@@ -13,7 +13,6 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserRepositoryTest extends KernelTestCase
 {

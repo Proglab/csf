@@ -2,7 +2,6 @@
 
 namespace App\Tests\Entity;
 
-use App\DataFixtures\UsersFixtures;
 use App\Entity\User;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -58,7 +57,7 @@ class UserEntityTest extends KernelTestCase
     public function testDuplicateMail(): void
     {
         self::bootKernel();
-        $this->loadFixtures([UsersFixtures::class]);
+        $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
         $user = $this->getEntity();
         $user->setEmail('superadmin@csf.com');
         $errors = self::$container->get('validator')->validate($user);

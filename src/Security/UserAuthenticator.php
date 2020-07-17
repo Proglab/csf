@@ -46,12 +46,18 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
      */
     private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, Security $security)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->security = $security;
     }
 
     public function supports(Request $request)
@@ -117,11 +123,11 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         $user->setLastConnection(new \DateTime('now'));
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        } else {
+            return new RedirectResponse($this->urlGenerator->generate('homepage'));
         }
-
-        return new RedirectResponse($this->urlGenerator->generate('admin'));
     }
 
     protected function getLoginUrl()
