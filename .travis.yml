@@ -20,9 +20,18 @@ install:
   - php bin/console doctrine:fixtures:load -n --env=test
 
 script:
+  - composer validate --strict --no-check-lock
   - phpdbg -qrr -d memory_limit=-1 ./vendor/bin/simple-phpunit --colors  --coverage-clover=coverage.xml
   - ./vendor/bin/phpstan analyse src --level=6
   - ./vendor/bin/php-cs-fixer fix ./src --diff --diff-format=udiff --dry-run --no-interaction --ansi --rules=@Symfony
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
