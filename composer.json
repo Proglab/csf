@@ -84,7 +84,11 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "test": "vendor\\bin\\simple-phpunit.bat --colors",
+        "test_coverage": "vendor\\bin\\simple-phpunit.bat --colors --coverage-clover=coverage.xml && codecov.exe -f coverage.xml -t \"502857c0-220e-46ed-89fa-e65563de9ac6\"",
+        "phpcs": "vendor\\bin\\php-cs-fixer.bat fix --rules=@Symfony",
+        "phpstan": "vendor\\bin\\phpstan analyse src --level=6"
     },
     "conflict": {
         "symfony/symfony": "*"
