@@ -55,6 +55,7 @@
 /.idea/
 
 .env.local
+/var/database.db
 
 
 ###> friendsofphp/php-cs-fixer ###

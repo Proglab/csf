@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1594980286">
-  <project timestamp="1594980286">
+<coverage generated="1594995066">
+  <project timestamp="1594995066">
     <package name="App\Controller\Admin">
       <file name="C:\wamp64-php7.2\www\csf\src\Controller\Admin\AdminCrudController.php">
         <class name="App\Controller\Admin\AdminCrudController" namespace="App\Controller\Admin">
@@ -329,19 +329,19 @@
         <class name="App\DataFixtures\UsersFixtures" namespace="App\DataFixtures">
           <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
         </class>
-        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="19" type="stmt" count="5"/>
-        <line num="20" type="stmt" count="5"/>
-        <line num="22" type="method" name="load" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="24" type="stmt" count="2"/>
-        <line num="25" type="stmt" count="2"/>
-        <line num="26" type="stmt" count="2"/>
-        <line num="27" type="stmt" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="29" type="stmt" count="2"/>
-        <line num="32" type="stmt" count="2"/>
-        <line num="34" type="stmt" count="2"/>
-        <line num="35" type="stmt" count="2"/>
+        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="19" type="stmt" count="6"/>
+        <line num="20" type="stmt" count="6"/>
+        <line num="22" type="method" name="load" visibility="public" complexity="2" crap="2" count="3"/>
+        <line num="24" type="stmt" count="3"/>
+        <line num="25" type="stmt" count="3"/>
+        <line num="26" type="stmt" count="3"/>
+        <line num="27" type="stmt" count="3"/>
+        <line num="28" type="stmt" count="3"/>
+        <line num="29" type="stmt" count="3"/>
+        <line num="32" type="stmt" count="3"/>
+        <line num="34" type="stmt" count="3"/>
+        <line num="35" type="stmt" count="3"/>
         <metrics loc="36" ncloc="33" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
       </file>
     </package>
@@ -350,58 +350,58 @@
         <class name="App\Entity\User" namespace="App\Entity">
           <metrics complexity="32" methods="24" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="33" elements="62" coveredelements="53"/>
         </class>
-        <line num="91" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
-        <line num="93" type="stmt" count="11"/>
-        <line num="94" type="stmt" count="11"/>
-        <line num="95" type="stmt" count="11"/>
+        <line num="91" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+        <line num="93" type="stmt" count="12"/>
+        <line num="94" type="stmt" count="12"/>
+        <line num="95" type="stmt" count="12"/>
         <line num="97" type="method" name="getId" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="99" type="stmt" count="2"/>
         <line num="102" type="method" name="getEmail" visibility="public" complexity="2" crap="2" count="6"/>
         <line num="104" type="stmt" count="6"/>
-        <line num="107" type="method" name="setEmail" visibility="public" complexity="1" crap="1" count="10"/>
-        <line num="109" type="stmt" count="10"/>
-        <line num="111" type="stmt" count="10"/>
+        <line num="107" type="method" name="setEmail" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="109" type="stmt" count="11"/>
+        <line num="111" type="stmt" count="11"/>
         <line num="119" type="method" name="getUsername" visibility="public" complexity="1" crap="1" count="5"/>
         <line num="121" type="stmt" count="5"/>
-        <line num="127" type="method" name="getRoles" visibility="public" complexity="1" crap="1" count="12"/>
-        <line num="129" type="stmt" count="12"/>
-        <line num="131" type="stmt" count="12"/>
-        <line num="133" type="stmt" count="12"/>
-        <line num="141" type="method" name="setRoles" visibility="public" complexity="1" crap="1" count="11"/>
-        <line num="143" type="stmt" count="11"/>
-        <line num="145" type="stmt" count="11"/>
-        <line num="151" type="method" name="getPassword" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="153" type="stmt" count="5"/>
-        <line num="156" type="method" name="setPassword" visibility="public" complexity="1" crap="1" count="8"/>
-        <line num="158" type="stmt" count="8"/>
-        <line num="160" type="stmt" count="8"/>
-        <line num="166" type="method" name="getSalt" visibility="public" complexity="1" crap="1" count="8"/>
-        <line num="168" type="stmt" count="8"/>
+        <line num="127" type="method" name="getRoles" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="129" type="stmt" count="13"/>
+        <line num="131" type="stmt" count="13"/>
+        <line num="133" type="stmt" count="13"/>
+        <line num="141" type="method" name="setRoles" visibility="public" complexity="1" crap="1" count="12"/>
+        <line num="143" type="stmt" count="12"/>
+        <line num="145" type="stmt" count="12"/>
+        <line num="151" type="method" name="getPassword" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="153" type="stmt" count="6"/>
+        <line num="156" type="method" name="setPassword" visibility="public" complexity="1" crap="1" count="9"/>
+        <line num="158" type="stmt" count="9"/>
+        <line num="160" type="stmt" count="9"/>
+        <line num="166" type="method" name="getSalt" visibility="public" complexity="1" crap="1" count="9"/>
+        <line num="168" type="stmt" count="9"/>
         <line num="174" type="method" name="eraseCredentials" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="176" type="stmt" count="1"/>
         <line num="177" type="stmt" count="1"/>
         <line num="179" type="method" name="getFirstname" visibility="public" complexity="2" crap="2" count="7"/>
         <line num="181" type="stmt" count="7"/>
-        <line num="184" type="method" name="setFirstname" visibility="public" complexity="1" crap="1" count="10"/>
-        <line num="186" type="stmt" count="10"/>
-        <line num="188" type="stmt" count="10"/>
+        <line num="184" type="method" name="setFirstname" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="186" type="stmt" count="11"/>
+        <line num="188" type="stmt" count="11"/>
         <line num="191" type="method" name="getLastname" visibility="public" complexity="2" crap="2" count="7"/>
         <line num="193" type="stmt" count="7"/>
-        <line num="196" type="method" name="setLastname" visibility="public" complexity="1" crap="1" count="10"/>
-        <line num="198" type="stmt" count="10"/>
-        <line num="200" type="stmt" count="10"/>
+        <line num="196" type="method" name="setLastname" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="198" type="stmt" count="11"/>
+        <line num="200" type="stmt" count="11"/>
         <line num="203" type="method" name="isVerified" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="205" type="stmt" count="0"/>
-        <line num="208" type="method" name="setIsVerified" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="210" type="stmt" count="7"/>
-        <line num="212" type="stmt" count="7"/>
+        <line num="208" type="method" name="setIsVerified" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="210" type="stmt" count="8"/>
+        <line num="212" type="stmt" count="8"/>
         <line num="215" type="method" name="getFullName" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="217" type="stmt" count="2"/>
-        <line num="220" type="method" name="getPlainPassword" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="222" type="stmt" count="2"/>
-        <line num="225" type="method" name="setPlainPassword" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="227" type="stmt" count="4"/>
-        <line num="229" type="stmt" count="4"/>
+        <line num="220" type="method" name="getPlainPassword" visibility="public" complexity="2" crap="2" count="3"/>
+        <line num="222" type="stmt" count="3"/>
+        <line num="225" type="method" name="setPlainPassword" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="227" type="stmt" count="5"/>
+        <line num="229" type="stmt" count="5"/>
         <line num="232" type="method" name="getCreatedDt" visibility="public" complexity="2" crap="6.00" count="0"/>
         <line num="234" type="stmt" count="0"/>
         <line num="237" type="method" name="setCreatedDt" visibility="public" complexity="1" crap="2.00" count="0"/>
@@ -476,81 +476,65 @@
     <package name="App">
       <file name="C:\wamp64-php7.2\www\csf\src\Kernel.php">
         <class name="App\Kernel" namespace="App">
-          <metrics complexity="7" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="24" coveredelements="24"/>
+          <metrics complexity="7" methods="4" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="6" elements="24" coveredelements="8"/>
         </class>
-        <line num="18" type="method" name="registerBundles" visibility="public" complexity="3" crap="3" count="16"/>
-        <line num="20" type="stmt" count="16"/>
-        <line num="21" type="stmt" count="16"/>
-        <line num="22" type="stmt" count="16"/>
-        <line num="23" type="stmt" count="16"/>
-        <line num="26" type="stmt" count="16"/>
-        <line num="28" type="method" name="getProjectDir" visibility="public" complexity="1" crap="1" count="16"/>
-        <line num="30" type="stmt" count="16"/>
-        <line num="33" type="method" name="configureContainer" visibility="protected" complexity="2" crap="2" count="1"/>
-        <line num="35" type="stmt" count="1"/>
-        <line num="36" type="stmt" count="1"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="41" type="stmt" count="1"/>
-        <line num="42" type="stmt" count="1"/>
-        <line num="43" type="stmt" count="1"/>
-        <line num="44" type="stmt" count="1"/>
-        <line num="46" type="method" name="configureRoutes" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="48" type="stmt" count="1"/>
-        <line num="50" type="stmt" count="1"/>
-        <line num="51" type="stmt" count="1"/>
-        <line num="52" type="stmt" count="1"/>
-        <line num="53" type="stmt" count="1"/>
-        <metrics loc="54" ncloc="54" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="24" coveredelements="24"/>
+        <line num="18" type="method" name="registerBundles" visibility="public" complexity="3" crap="3" count="17"/>
+        <line num="20" type="stmt" count="17"/>
+        <line num="21" type="stmt" count="17"/>
+        <line num="22" type="stmt" count="17"/>
+        <line num="23" type="stmt" count="17"/>
+        <line num="26" type="stmt" count="17"/>
+        <line num="28" type="method" name="getProjectDir" visibility="public" complexity="1" crap="1" count="17"/>
+        <line num="30" type="stmt" count="17"/>
+        <line num="33" type="method" name="configureContainer" visibility="protected" complexity="2" crap="6.00" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="46" type="method" name="configureRoutes" visibility="protected" complexity="1" crap="2.00" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <metrics loc="54" ncloc="54" classes="1" methods="4" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="6" elements="24" coveredelements="8"/>
       </file>
     </package>
     <package name="DoctrineMigrations">
       <file name="C:\wamp64-php7.2\www\csf\src\Migrations\Version20200710153836.php">
         <class name="DoctrineMigrations\Version20200710153836" namespace="DoctrineMigrations">
-          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="8" coveredelements="0"/>
+          <metrics complexity="3" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="getDescription" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="17" type="stmt" count="0"/>
-        <line num="20" type="method" name="up" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <line num="26" type="method" name="down" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="29" type="stmt" count="0"/>
-        <line num="30" type="stmt" count="0"/>
-        <metrics loc="31" ncloc="24" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="8" coveredelements="0"/>
+        <metrics loc="31" ncloc="24" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
       <file name="C:\wamp64-php7.2\www\csf\src\Migrations\Version20200715003214.php">
         <class name="DoctrineMigrations\Version20200715003214" namespace="DoctrineMigrations">
-          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="8" coveredelements="0"/>
+          <metrics complexity="3" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="getDescription" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="17" type="stmt" count="0"/>
-        <line num="20" type="method" name="up" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="23" type="stmt" count="0"/>
-        <line num="24" type="stmt" count="0"/>
-        <line num="26" type="method" name="down" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="29" type="stmt" count="0"/>
-        <line num="30" type="stmt" count="0"/>
-        <metrics loc="31" ncloc="24" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="8" coveredelements="0"/>
+        <metrics loc="31" ncloc="24" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
     <package name="App\Repository">
       <file name="C:\wamp64-php7.2\www\csf\src\Repository\UserRepository.php">
         <class name="App\Repository\UserRepository" namespace="App\Repository">
-          <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="2" elements="10" coveredelements="3"/>
+          <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="7" elements="10" coveredelements="8"/>
         </class>
-        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
-        <line num="22" type="stmt" count="12"/>
-        <line num="23" type="stmt" count="12"/>
-        <line num="28" type="method" name="upgradePassword" visibility="public" complexity="2" crap="6.00" count="0"/>
-        <line num="30" type="stmt" count="0"/>
+        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="22" type="stmt" count="13"/>
+        <line num="23" type="stmt" count="13"/>
+        <line num="28" type="method" name="upgradePassword" visibility="public" complexity="2" crap="2.02" count="1"/>
+        <line num="30" type="stmt" count="1"/>
         <line num="31" type="stmt" count="0"/>
-        <line num="34" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <line num="36" type="stmt" count="0"/>
-        <line num="37" type="stmt" count="0"/>
-        <metrics loc="67" ncloc="28" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="2" elements="10" coveredelements="3"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <metrics loc="38" ncloc="29" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="7" elements="10" coveredelements="8"/>
       </file>
     </package>
     <package name="App\Security">
@@ -628,6 +612,6 @@
         <metrics loc="131" ncloc="108" classes="1" methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="28" elements="39" coveredelements="34"/>
       </file>
     </package>
-    <metrics files="18" loc="1561" ncloc="1274" classes="18" methods="97" coveredmethods="49" conditionals="0" coveredconditionals="0" statements="404" coveredstatements="212" elements="501" coveredelements="261"/>
+    <metrics files="18" loc="1532" ncloc="1275" classes="16" methods="91" coveredmethods="47" conditionals="0" coveredconditionals="0" statements="394" coveredstatements="203" elements="485" coveredelements="250"/>
   </project>
 </coverage>
