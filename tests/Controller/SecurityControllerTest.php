@@ -2,6 +2,8 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Tests\NeedLogin;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -43,6 +45,9 @@ class SecurityControllerTest extends WebTestCase
         ]);
         $client->submit($form);
         $this->assertResponseRedirects('/admin');
+        /** @var User $user */
+        $user = $this->getContainer()->get(UserRepository::class)->findOneBy(['email' => 'superadmin@csf.com']);
+        $this->assertInstanceOf(\DateTime::class, $user->getLastConnection());
     }
 
     public function testProfilePageLoggedUser(): void

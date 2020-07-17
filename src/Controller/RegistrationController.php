@@ -9,7 +9,6 @@ use App\Security\UserAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -73,18 +72,12 @@ class RegistrationController extends AbstractController
 
             $mailer->send($message);
 
-            $response = $guardHandler->authenticateUserAndHandleSuccess(
+            return  $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
-
-            if (!$response) {
-                throw new NotFoundHttpException('no response');
-            }
-
-            return $response;
         }
 
         return $this->render('registration/register.html.twig', [

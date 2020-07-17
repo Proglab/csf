@@ -91,7 +91,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->setRoles($this->getRoles());
-        $this->createdDt = new \DateTimeImmutable('now');
+        $this->setCreatedDt(new \DateTimeImmutable('now'));
     }
 
     public function getId(): ?int

@@ -33,6 +33,7 @@ class EmailVerifier
         $this->entityManager = $manager;
     }
 
+    /**
     public function sendEmailConfirmation(string $verifyEmailRouteName, User $user, TemplatedEmail $email): void
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
@@ -49,7 +50,7 @@ class EmailVerifier
 
         $this->mailer->send($email);
     }
-
+     **/
     public function handleEmailConfirmation(Request $request, User $user): void
     {
         $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), (string) $user->getId(), (string) $user->getEmail());

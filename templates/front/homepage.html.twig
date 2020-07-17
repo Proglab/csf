@@ -3,5 +3,10 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <h1>Homepage</h1>
 {% endblock %}

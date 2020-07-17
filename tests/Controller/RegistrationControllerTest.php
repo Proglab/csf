@@ -2,10 +2,17 @@
 
 namespace App\Tests\Controller;
 
+use App\Repository\UserRepository;
+use App\Tests\NeedLogin;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 class RegistrationControllerTest extends WebTestCase
 {
+    use NeedLogin;
+    use FixturesTrait;
+
     public function testRegisterPage(): void
     {
         $client = static::createClient();
@@ -57,9 +64,24 @@ class RegistrationControllerTest extends WebTestCase
             'registration_form[agreeTerms]' => 1,
         ]);
         $client->submit($form);
+        $this->assertResponseRedirects('/');
 
         $mailCollector = $client->getProfile()->getCollector('swiftmailer');
         $this->assertSame(1, $mailCollector->getMessageCount());
-        $this->assertResponseRedirects('/');
+
+        $user = $this->getContainer()->get(UserRepository::class)->findOneBy(['email' => 'test@test.com']);
+        $this->login($client, $user);
+
+        /** @var \Swift_Message $message */
+        $message = $mailCollector->getMessages()[0];
+        $crawlerHTML = new Crawler($message->getBody());
+        $url = $crawlerHTML->filter('a')->extract(['href']);
+        $client->request('GET', $url[0]);
+        $client->followRedirect();
+
+        $this->assertSelectorExists('.alert.alert-success');
+
+        $user = $this->getContainer()->get(UserRepository::class)->findOneBy(['email' => 'test@test.com']);
+        $this->assertTrue($user->isVerified());
     }
 }

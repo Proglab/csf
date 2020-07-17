@@ -43,6 +43,8 @@ class UserEntityTest extends KernelTestCase
         self::bootKernel();
         $errors = self::$container->get('validator')->validate($user);
         $this->assertCount(0, $errors, $this->getErrors($errors));
+        $this->assertTrue($user->isVerified());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedDt());
     }
 
     public function testInvalidEntity(): void

@@ -56,7 +56,7 @@
 
 .env.local
 /var/database.db
-
+/public/docs/
 
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
