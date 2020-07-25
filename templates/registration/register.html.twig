@@ -3,35 +3,69 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-
-    <h1>Register</h1>
 
     {# For convenience sake of this snippet, store the errors in a variable #}
     {% set formErrors = registrationForm.vars.errors.form.getErrors(true) %}
 
     {# If there are errors in the form, display them in this unorganized list #}
     {% if formErrors|length %}
-            {% for error in formErrors %}
-                <div class="alert alert-danger" role="alert">{{ error.message }}</div>
-            {% endfor %}
+        {% for error in formErrors %}
+            <div class="alert alert-danger" role="alert">{{ error.message }}</div>
+        {% endfor %}
     {% endif %}
 
-
     {{ form_start(registrationForm) }}
-    {{ form_label(registrationForm.firstname) }}
-    {{ form_widget(registrationForm.firstname, {'attr': {'class': 'task_field'}}) }}
-    {{ form_label(registrationForm.lastname) }}
-    {{ form_widget(registrationForm.lastname, {'attr': {'class': 'task_field'}}) }}
-    {{ form_label(registrationForm.email) }}
-    {{ form_widget(registrationForm.email, {'attr': {'class': 'task_field'}}) }}
-    {{ form_label(registrationForm.plainPassword) }}
-    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'task_field'}}) }}
-    {{ form_label(registrationForm.agreeTerms) }}
-    {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'task_field'}}) }}
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <h1>Register</h1>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            {{ form_label(registrationForm.firstname) }}
+                            {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            {{ form_label(registrationForm.lastname) }}:
+                            {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            {{ form_label(registrationForm.email) }}
+                            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
 
-        <button type="submit" class="btn">Register</button>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            {{ form_label(registrationForm.plainPassword) }}
+                            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            {{ form_label(registrationForm.agreeTerms) }}
+                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Register
+                    </button>
+            </div>
+
+        </div>
     {{ form_end(registrationForm) }}
+
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            You already have an account ? Please <a href="{{ path('app_login') }}">login</a>
+        </div>
+        <div class="col-lg-8 mb-4">
+            <a href="#">You lost your password ?</a>
+        </div>
+    </div>
+
 {% endblock %}

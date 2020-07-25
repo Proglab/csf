@@ -8,5 +8,56 @@
             {{ message }}
         </div>
     {% endfor %}
-    <h1>Homepage</h1>
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <h1>Homepage</h1>
+            <p>You have successfully installed Csf CMS in your website!</p>
+        </div>
+    </div>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Users</h5>
+                <small>ROLE_USER</small>
+            </div>
+            <p class="mb-1"><strong>E-mail :</strong> user@csf.com</p>
+            <p class="mb-1"><strong>Password :</strong> user</p>
+            <small>redirect to homepage</small>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Administrator</h5>
+                <small>ROLE_ADMIN</small>
+            </div>
+            <p class="mb-1"><strong>E-mail :</strong> admin@csf.com</p>
+            <p class="mb-1"><strong>Password :</strong> admin</p>
+            <small>redirect to admin</small>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Super Administrator</h5>
+                <small>ROLE_SUPERADMIN</small>
+            </div>
+            <p class="mb-1"><strong>E-mail :</strong> superadmin@csf.com</p>
+            <p class="mb-1"><strong>Password :</strong> superadmin@</p>
+            <small>redirect to admin</small>
+        </a>
+    </div>
+    <br/>
+    <div class="list-group">
+        <a href="https://trello.com/b/f4G2wPBQ/csf"
+           class="list-group-item list-group-item-action flex-column align-items-start" target="_blank">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Trello</h5>
+            </div>
+        </a>
+        <a href="https://github.com/Proglab/csf"
+           class="list-group-item list-group-item-action flex-column align-items-start" target="_blank">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Github</h5>
+            </div>
+        </a>
+    </div>
+    <br>
 {% endblock %}

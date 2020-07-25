@@ -31,6 +31,7 @@ class DashboardController extends AbstractDashboardController
     {
         return [
             MenuItem::linktoDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::linktoRoute('Frontpage', 'fa fa-eye', 'homepage'),
             MenuItem::subMenu('Users', 'fa fa-users')->setSubItems([
                 MenuItem::linkToCrud('User', 'fa fa-user', User::class)->setController(UserCrudController::class),
                 MenuItem::linkToCrud('Admin', 'fa fa-user-shield', User::class)->setController(AdminCrudController::class)->setPermission('ROLE_ADMIN'),

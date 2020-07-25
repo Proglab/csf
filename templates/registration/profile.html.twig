@@ -1,13 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-
-    <h1>Register</h1>
+    <h1>Profile</h1>
 
     {# For convenience sake of this snippet, store the errors in a variable #}
     {% set formErrors = registrationForm.vars.errors.form.getErrors(true) %}
@@ -21,13 +17,31 @@
 
 
     {{ form_start(registrationForm) }}
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="control-group form-group">
+            <div class="controls">
     {{ form_label(registrationForm.firstname) }}
-    {{ form_widget(registrationForm.firstname, {'attr': {'class': 'task_field'}}) }}
+    {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <div class="control-group form-group">
+            <div class="controls">
     {{ form_label(registrationForm.lastname) }}
-    {{ form_widget(registrationForm.lastname, {'attr': {'class': 'task_field'}}) }}
+    {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-control'}}) }}
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <div class="control-group form-group">
+            <div class="controls">
     {{ form_label(registrationForm.email) }}
-    {{ form_widget(registrationForm.email, {'attr': {'class': 'task_field'}}) }}
-
-        <button type="submit" class="btn">Update</button>
+    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary">Update</button>
     {{ form_end(registrationForm) }}
+    </div>
+</div>
 {% endblock %}

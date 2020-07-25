@@ -6,9 +6,11 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -128,6 +130,19 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         } else {
             return new RedirectResponse($this->urlGenerator->generate('homepage'));
         }
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        if ($request->hasSession()) {
+            /** @var Session $session */
+            $session = $request->getSession();
+            $session->getFlashBag()->add('danger', $exception->getMessage());
+        }
+
+        $url = $this->getLoginUrl();
+
+        return new RedirectResponse($url);
     }
 
     protected function getLoginUrl()

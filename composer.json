@@ -88,7 +88,7 @@
         "test": "vendor\\bin\\simple-phpunit.bat --colors",
         "test_coverage": "vendor\\bin\\simple-phpunit.bat --colors --coverage-html=E:\\wamp64\\www\\csf\\public\\docs\\Coverage",
         "phpcs": "vendor\\bin\\php-cs-fixer.bat fix --rules=@Symfony",
-        "phpstan": "vendor\\bin\\phpstan analyse src --level=6"
+        "phpstan": "vendor\\bin\\phpstan analyse src --level=5"
     },
     "conflict": {
         "symfony/symfony": "*"
