@@ -4,14 +4,38 @@ This challenge is to make a Wordpress like.
 
 ## Pre-requisite
 
-* Php7.2+ or docker
+* Php7.4.1+ or docker
 
 ## Installation and use
 
-* **Dev:** You just need to launch `php -S localhost:8000 -t public`.
-* **Prod:** You need to install php-fpm and a server.
+Create de database : 
 
-@Todo make a better install guide
+php bin/console doctrine:database:create
+
+Create the structure of the database :
+
+php bin/console doctrine:migration:migrate
+
+Laod the fixtures :
+
+php bin/console doctrine:fixtures:load
+
+You can connect to the admin with :
+
+To be a ROLE_USER :
+
+      email: 'user@csf.com'
+      password: 'user'
+      
+To be a ROLE_ADMIN :
+    
+      email: 'admin@csf.com'
+      password: 'admin'
+
+To be a ROLE_SUPERADMIN :
+
+      email: 'superadmin@csf.com'
+      password: 'superadmin'
 
 ## Contribute
 
@@ -22,6 +46,10 @@ see [CONTRIBUTING](./CONTRIBUTING.md)
 ### Initial module
 
 * User management.
+    * :white_check_mark: register a user
+    * :white_check_mark: login
+    * :white_check_mark: crud
+    * lost password
 * Rights management.
 * Module management.
 * Mail management.

@@ -4,7 +4,7 @@
     "name": "proglab/csf",
     "description": "Just a wordpress clone",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.4.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "easycorp/easyadmin-bundle": "^3.0",
