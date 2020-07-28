@@ -64,10 +64,10 @@ class RegistrationControllerTest extends WebTestCase
             'registration_form[agreeTerms]' => 1,
         ]);
         $client->submit($form);
-        $this->assertResponseRedirects('/');
+        $this->assertResponseRedirects('/login');
 
         $mailCollector = $client->getProfile()->getCollector('swiftmailer');
-        $this->assertSame(1, $mailCollector->getMessageCount());
+        $this->assertSame(1, $mailCollector->getMessageCount(), 'Mail not send on user registration!');
 
         $user = $this->getContainer()->get(UserRepository::class)->findOneBy(['email' => 'test@test.com']);
         $this->login($client, $user);

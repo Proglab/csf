@@ -41,8 +41,8 @@ class AdminCrudControllerTest extends WebTestCase
 
     private function crawl($url, $client)
     {
-        foreach($this->url_banned as $url_banned) {
-            if (strpos($url, $url_banned) === 0) {
+        foreach ($this->url_banned as $url_banned) {
+            if (0 === strpos($url, $url_banned)) {
                 return;
             }
         }
@@ -51,7 +51,7 @@ class AdminCrudControllerTest extends WebTestCase
             return;
         }
 
-        if (strpos($url, 'crudAction=delete') !== false) {
+        if (false !== strpos($url, 'crudAction=delete')) {
             return;
         } else {
             $this->url_crawled[] = $url;
@@ -60,8 +60,8 @@ class AdminCrudControllerTest extends WebTestCase
         }
         $crawler = $client->getCrawler();
         $urls = $crawler->filter('a');
-        foreach($urls as $link) {
-            if(!in_array($link->getAttribute('href'), $this->url_crawled)) {
+        foreach ($urls as $link) {
+            if (!in_array($link->getAttribute('href'), $this->url_crawled)) {
                 $this->crawl($link->getAttribute('href'), $client);
             }
         }

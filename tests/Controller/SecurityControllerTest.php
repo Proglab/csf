@@ -20,7 +20,8 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(200);
         $this->assertSelectorNotExists('.alert.alert-danger');
     }
-/**
+
+    /**
     public function testLoginBadCredentials(): void
     {
         $client = static::createClient();
@@ -46,7 +47,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseRedirects('/admin');
         $this->assertInstanceOf(\DateTime::class, $user->getLastConnection());
     }
-*/
+     */
     public function testProfilePageLoggedUser(): void
     {
         $client = static::createClient();

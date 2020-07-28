@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Event\UserRegisteredEvent;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,10 +22,15 @@ class RegistrationController extends AbstractController
      * @var EmailVerifier
      */
     private $emailVerifier;
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $dispatcher;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, EventDispatcherInterface $dispatcher)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -33,51 +40,26 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        if ($request->isMethod('POST')) {
+            $form->submit($request->request->all($form->getName()));
+            if ($form->isSubmitted() && $form->isValid()) {
+                // encode the plain password
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $event = new UserRegisteredEvent($user);
+                $this->dispatcher->dispatch($event, UserRegisteredEvent::NAME);
+                $this->addFlash('success', 'Welcome '.$user->getFirstname().', you can now login to your account');
 
-            $signatureComponents = $helper->generateSignature(
-                'app_verify_email',
-                (string) $user->getId(),
-                (string) $user->getEmail()
-            );
-
-            $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('info@proglab.com', 'Proglab')
-                ->setTo($user->getEmail(), $user->getFullName())
-                ->setSubject('Please Confirm your Email')
-                ->setBody(
-                    $this->renderView(
-                    // templates/emails/registration.html.twig
-                        'registration/confirmation_email.html.twig',
-                        [
-                            'signedUrl' => $signatureComponents->getSignedUrl(),
-                            'expiresAt' => $signatureComponents->getExpiresAt(),
-                        ]
-                    ),
-                    'text/html'
-                )
-            ;
-
-            $mailer->send($message);
-
-            return  $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+                return $this->redirectToRoute('app_login');
+            }
         }
 
         return $this->render('registration/register.html.twig', [
