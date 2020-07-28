@@ -10,6 +10,8 @@ class AdminCrudControllerTest extends WebTestCase
 {
     use FixturesTrait;
     use NeedLogin;
+    protected $url_crawled = [''];
+    protected $url_banned = ['https://symfony.com', 'https://trello.com', 'https://github.com', '#', 'mailto', '/?', '/logout'];
 
     public function testAdminPage()
     {
@@ -26,5 +28,42 @@ class AdminCrudControllerTest extends WebTestCase
 
         $client->request('GET', '/admin');
         $this->assertResponseStatusCodeSame(200);
+    }
+
+    public function testCrawlAdmin()
+    {
+        $client = static::createClient();
+        $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
+        $this->login($client, $users['user_admin']);
+
+        $this->crawl('/admin', $client);
+    }
+
+    private function crawl($url, $client)
+    {
+        foreach($this->url_banned as $url_banned) {
+            if (strpos($url, $url_banned) === 0) {
+                return;
+            }
+        }
+
+        if (in_array($url, $this->url_crawled)) {
+            return;
+        }
+
+        if (strpos($url, 'crudAction=delete') !== false) {
+            return;
+        } else {
+            $this->url_crawled[] = $url;
+            $client->request('GET', $url);
+            $this->assertResponseStatusCodeSame(200, $url);
+        }
+        $crawler = $client->getCrawler();
+        $urls = $crawler->filter('a');
+        foreach($urls as $link) {
+            if(!in_array($link->getAttribute('href'), $this->url_crawled)) {
+                $this->crawl($link->getAttribute('href'), $client);
+            }
+        }
     }
 }
