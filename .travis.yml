@@ -20,10 +20,7 @@ install:
   - php bin/console doctrine:fixtures:load -n --env=test
 
 script:
-  - composer validate --strict --no-check-lock
-  - phpdbg -qrr -d memory_limit=-1 ./vendor/bin/simple-phpunit --colors  --coverage-clover=coverage.xml
-  - ./vendor/bin/phpstan analyse src --level=5
-  - ./vendor/bin/php-cs-fixer fix ./src --diff --diff-format=udiff --dry-run --no-interaction --ansi --rules=@Symfony
+  - ./vendor/bin/grumphp run
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

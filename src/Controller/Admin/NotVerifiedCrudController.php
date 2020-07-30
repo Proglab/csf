@@ -49,7 +49,9 @@ class NotVerifiedCrudController extends AbstractCrudController
     {
         $actions->disable(Action::NEW, Action::DELETE, Action::DETAIL)
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
-                return $action->displayIf(function () { return false; });
+                return $action->displayIf(function () {
+                    return false;
+                });
             });
 
         return $actions;
