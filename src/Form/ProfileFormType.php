@@ -12,6 +12,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileFormType extends AbstractType
 {
+    public const EMAIL_MIN_CHAR = 6;
+    public const EMAIL_MAX_CHAR = 254;
+
     /**
      * @param FormBuilderInterface<object> $builder
      * @param array<string|int, string>    $options
@@ -39,10 +42,10 @@ class ProfileFormType extends AbstractType
                         'message' => 'Please enter a email',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => self::EMAIL_MIN_CHAR,
                         'minMessage' => 'Your email should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
-                        'max' => 254,
+                        'max' => self::EMAIL_MAX_CHAR,
                     ]),
                 ],
             ])

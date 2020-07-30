@@ -37,7 +37,7 @@ class MailSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onUserRegistered(UserRegisteredEvent $event)
+    public function onUserRegistered(UserRegisteredEvent $event): void
     {
         $user = $event->getUser();
         $signatureComponents = $this->verifyEmailHelper->generateSignature(

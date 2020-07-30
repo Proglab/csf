@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -95,6 +97,7 @@ class ProfileCrudController extends AbstractCrudController
         $entityFactory = $this->get(EntityFactory::class);
         $entityFactory->processFields($context->getEntity(), FieldCollection::new($this->configureFields(Crud::PAGE_EDIT)));
         $entityFactory->processActions($context->getEntity(), $context->getCrud()->getActionsConfig());
+
         $entityInstance = $context->getEntity()->getInstance();
         $editForm = $this->createEditForm($context->getEntity(), $context->getCrud()->getEditFormOptions(), $context);
         $editForm->handleRequest($context->getRequest());
@@ -102,7 +105,11 @@ class ProfileCrudController extends AbstractCrudController
             $event = new BeforeEntityUpdatedEvent($entityInstance);
             $eventDispatcher->dispatch($event);
             $entityInstance = $event->getEntityInstance();
-            $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entityInstance);
+            /** @var Registry $doctrine */
+            $doctrine = $this->get('doctrine');
+            /** @var EntityManagerInterface $em */
+            $em = $doctrine->getManagerForClass($context->getEntity()->getFqcn());
+            $this->updateEntity($em, $entityInstance);
 
             $eventDispatcher->dispatch(new AfterEntityUpdatedEvent($entityInstance));
 

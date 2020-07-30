@@ -15,6 +15,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
+    public const EMAIL_MIN_CHAR = 6;
+    public const EMAIL_MAX_CHAR = 254;
+    public const PASSWORD_MIN_CHAR = 6;
+    public const PASSWORD_MAX_CHAR = 254;
+
     /**
      * @param FormBuilderInterface<object> $builder
      * @param array<string|int, string>    $options
@@ -42,10 +47,10 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a email',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => self::EMAIL_MIN_CHAR,
                         'minMessage' => 'Your email should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
-                        'max' => 254,
+                        'max' => self::EMAIL_MAX_CHAR,
                     ]),
                 ],
             ])
@@ -66,10 +71,10 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => self::PASSWORD_MIN_CHAR,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
-                        'max' => 254,
+                        'max' => self::PASSWORD_MAX_CHAR,
                     ]),
                 ],
             ])
