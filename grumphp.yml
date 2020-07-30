@@ -1,5 +1,22 @@
 grumphp:
+    stop_on_failure: false
     tasks:
+        clover_coverage:
+            clover_file: ./coverage.xml
+            level: 50
+            metadata:
+                priority: 2
+        git_blacklist:
+            keywords:
+                - "var_dump("
+                - "dump("
+                - "dd("
+            regexp_type: G
+            whitelist_patterns:
+                - /^public\/(.*)/
+                - /^vendor\/(.*)/
+            metadata:
+                priority: 999
         composer:
             file: ./composer.json
             no_check_all: false
@@ -8,27 +25,36 @@ grumphp:
             no_local_repository: false
             with_dependencies: false
             strict: false
+            metadata:
+                priority: 992
         phpcsfixer:
             allow_risky: ~
             cache_file: ~
-            config: ~
+            config: ./php_cs.php
             rules: []
             using_cache: ~
             config_contains_finder: true
             verbose: true
             diff: false
             triggered_by: ['php']
+            metadata:
+                priority: 992
+        phpmnd:
+            directory: 'src/'
+            exclude: ['../tests', '../config', '../var', '../translations', 'Migrations', 'DataFixtures']
+            extensions: ['all']
+            hint: true
+            strings: false
+            metadata:
+                priority: 992
         phplint:
             exclude: []
             jobs: ~
             short_open_tag: false
             ignore_patterns: []
             triggered_by: ['php']
-        phpunitbridge:
-            config_file: ~
-            testsuite: ~
-            group: []
-            always_execute: false
+            metadata:
+                priority: 992
         yamllint:
             whitelist_patterns: []
             ignore_patterns: []
@@ -36,14 +62,24 @@ grumphp:
             exception_on_invalid_type: false
             parse_constant: false
             parse_custom_tags: false
+            metadata:
+                priority: 992
         securitychecker:
-            lockfile: ./composer.lock
-            format: ~
-            end_point: ~
-            timeout: ~
+            lockfile: composer.lock
+            timeout: 30
             run_always: false
+            metadata:
+                priority: 992
         phpspec:
             config_file: ~
             format: ~
             stop_on_failure: false
             verbose: false
+            metadata:
+                priority: 992
+        phpstan:
+            configuration: phpstan.neon
+            level: 7
+            memory_limit: '-1'
+            metadata:
+                priority: 992

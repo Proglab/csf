@@ -20,6 +20,7 @@ install:
   - php bin/console doctrine:fixtures:load -n --env=test
 
 script:
+  - phpdbg -qrr -d memory_limit=-1 ./vendor/bin/simple-phpunit  --colors --coverage-clover ./coverage.xml
   - ./vendor/bin/grumphp run
 
 after_success:

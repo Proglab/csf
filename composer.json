@@ -44,6 +44,10 @@
         "phpro/grumphp": "^0.19.1",
         "phpspec/phpspec": "^6.2",
         "phpstan/phpstan": "^0.12.32",
+        "phpstan/phpstan-doctrine": "^0.12.19",
+        "phpstan/phpstan-phpunit": "^0.12.15",
+        "phpstan/phpstan-symfony": "^0.12.7",
+        "povils/phpmnd": "^2.3",
         "sensiolabs/security-checker": "^6.0",
         "symfony/debug-pack": "*",
         "symfony/event-dispatcher": "5.1.*",
@@ -51,6 +55,7 @@
         "symfony/phpunit-bridge": "^5.1",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "^1.0",
+        "thecodingmachine/phpstan-strict-rules": "^0.12.0",
         "theofidry/alice-data-fixtures": "^1.2"
     },
     "config": {
@@ -93,7 +98,9 @@
         "test": "vendor\\bin\\simple-phpunit.bat --colors",
         "test_coverage": "vendor\\bin\\simple-phpunit.bat --colors --coverage-html=E:\\wamp64\\www\\csf\\public\\docs\\Coverage",
         "phpcs": "vendor\\bin\\php-cs-fixer.bat fix --rules=@Symfony",
-        "phpstan": "vendor\\bin\\phpstan analyse src --level=5"
+        "phpstan": "vendor\\bin\\phpstan.bat analyse src --level=5",
+        "grumphp": "vendor\\bin\\grumphp.bat run",
+        "test_full": "vendor\\bin\\simple-phpunit.bat --colors && vendor\\bin\\grumphp.bat run"
     },
     "conflict": {
         "symfony/symfony": "*"

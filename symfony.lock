@@ -233,6 +233,15 @@
     "phpstan/phpstan": {
         "version": "0.12.32"
     },
+    "phpstan/phpstan-doctrine": {
+        "version": "0.12.19"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.12.15"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.7"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -694,6 +703,9 @@
     },
     "symfonycasts/verify-email-bundle": {
         "version": "v1.0.0"
+    },
+    "thecodingmachine/phpstan-strict-rules": {
+        "version": "v0.12.0"
     },
     "theofidry/alice-data-fixtures": {
         "version": "1.0",
