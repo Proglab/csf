@@ -49,7 +49,7 @@ see [CONTRIBUTING](./CONTRIBUTING.md)
     * :white_check_mark: register a user
     * :white_check_mark: login
     * :white_check_mark: crud
-    * lost password
+    * :white_check_mark: lost password
 * Rights management.
 * Module management.
 * Mail management.
