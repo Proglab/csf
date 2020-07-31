@@ -79,4 +79,23 @@ class SecurityControllerTest extends WebTestCase
         $client->submit($form);
         $this->assertSelectorExists('.alert.alert-danger');
     }
+
+
+    public function testProfileUpdateMailSucceed(): void
+    {
+        $uniqueId = uniqid();
+
+        $client = static::createClient();
+        $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
+
+        $this->login($client, $users['user_superadmin']);
+        $crawler = $client->request('GET', '/profile');
+        $form = $crawler->selectButton('Update')->form([
+            'profile_form[firstname]' => $uniqueId,
+        ]);
+        $client->submit($form);
+
+        $user = $this->getContainer()->get(UserRepository::class)->findOneBy(['email' => 'superadmin@csf.com']);
+        $this->assertEquals($uniqueId, $user->getFirstname());
+    }
 }
