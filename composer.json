@@ -55,6 +55,7 @@
         "symfony/phpunit-bridge": "^5.1",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "^1.0",
+        "symfonycasts/reset-password-bundle": "^1.1",
         "thecodingmachine/phpstan-strict-rules": "^0.12.0",
         "theofidry/alice-data-fixtures": "^1.2"
     },

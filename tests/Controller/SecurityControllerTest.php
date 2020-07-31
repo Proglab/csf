@@ -39,7 +39,7 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $csrfToken = $client->getContainer()->get('security.csrf.token_manager')->getToken('authenticate');
-        /** @var User $user **/
+        /** @var User $user * */
         $user = $this->getContainer()->get(UserRepository::class)->findOneBy(['email' => 'superadmin@csf.com']);
         $data['email'] = $user->getEmail();
         $data['password'] = 'superadmin';
