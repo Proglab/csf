@@ -21,33 +21,34 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorNotExists('.alert.alert-danger');
     }
 
-    /**
     public function testLoginBadCredentials(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/login');
-        $client->submitForm('Log in', [
-            'email' => 'test@test.com',
-            'password' => '12345',
-        ]);
+        $csrfToken = $client->getContainer()->get('security.csrf.token_manager')->getToken('authenticate');
+        $data = [];
+        $data['email'] = 'test@test.com';
+        $data['password'] = '12345678';
+        $data['_csrf_token'] = $csrfToken;
+
+        $crawler = $client->request('POST', '/login', $data);
+        $client->followRedirect();
         $this->assertSelectorExists('.alert.alert-danger');
     }
 
     public function testLoginSuccessFull(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/login');
-        /** @var User $user *'/
+        $csrfToken = $client->getContainer()->get('security.csrf.token_manager')->getToken('authenticate');
+        /** @var User $user **/
         $user = $this->getContainer()->get(UserRepository::class)->findOneBy(['email' => 'superadmin@csf.com']);
-        $form = $crawler->selectButton('Log in')->form([
-            'email' => $user->getEmail(),
-            'password' => 'superadmin',
-        ]);
-        $client->submit($form);
+        $data['email'] = $user->getEmail();
+        $data['password'] = 'superadmin';
+        $data['_csrf_token'] = $csrfToken;
+        $crawler = $client->request('POST', '/login', $data);
         $this->assertResponseRedirects('/admin');
         $this->assertInstanceOf(\DateTime::class, $user->getLastConnection());
     }
-     */
+
     public function testProfilePageLoggedUser(): void
     {
         $client = static::createClient();
