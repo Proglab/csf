@@ -2,6 +2,7 @@
 
 namespace App\Subscriber;
 
+use App\Event\LostPasswordEvent;
 use App\Event\UserRegisteredEvent;
 use Swift_Mailer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -34,6 +35,7 @@ class MailSubscriber implements EventSubscriberInterface
     {
         return [
             UserRegisteredEvent::NAME => 'onUserRegistered',
+            LostPasswordEvent::NAME => 'onUserLostPassword',
         ];
     }
 
@@ -56,6 +58,28 @@ class MailSubscriber implements EventSubscriberInterface
                     [
                         'signedUrl' => $signatureComponents->getSignedUrl(),
                         'expiresAt' => $signatureComponents->getExpiresAt(),
+                    ]
+                ),
+                'text/html'
+            )
+        ;
+        $this->mailer->send($message);
+    }
+
+    public function onUserLostPassword(LostPasswordEvent $event): void
+    {
+        $user = $event->getUser();
+
+        $message = (new \Swift_Message())
+            ->setFrom('info@proglab.com', 'Proglab')
+            ->setTo($user->getEmail(), $user->getFullName())
+            ->setSubject('Your password reset request')
+            ->setBody(
+                $this->templating->render(
+                    'reset_password/email.html.twig',
+                    [
+                        'resetToken' => $event->getResetToken(),
+                        'tokenLifetime' => $event->getTokenLifetime(),
                     ]
                 ),
                 'text/html'
