@@ -34,7 +34,7 @@ class AdminCrudControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
-        $this->login($client, $users['user_admin']);
+        $this->login($client, $users['user_superadmin']);
 
         $this->crawl('/admin', $client);
     }
