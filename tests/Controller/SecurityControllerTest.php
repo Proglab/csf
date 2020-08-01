@@ -80,7 +80,6 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorExists('.alert.alert-danger');
     }
 
-
     public function testProfileUpdateMailSucceed(): void
     {
         $uniqueId = uniqid();
