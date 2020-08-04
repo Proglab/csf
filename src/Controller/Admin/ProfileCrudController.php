@@ -28,6 +28,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileCrudController extends AbstractCrudController
@@ -98,18 +99,36 @@ class ProfileCrudController extends AbstractCrudController
         $entityFactory->processFields($context->getEntity(), FieldCollection::new($this->configureFields(Crud::PAGE_EDIT)));
         $entityFactory->processActions($context->getEntity(), $context->getCrud()->getActionsConfig());
 
+        /** @var User $entityInstance */
         $entityInstance = $context->getEntity()->getInstance();
+        /** @var User $me */
+        $me = $this->getUser();
+
+        if ($entityInstance->getId() != $me->getId()) {
+            throw new AccessDeniedHttpException('not allowed');
+        }
+
         $editForm = $this->createEditForm($context->getEntity(), $context->getCrud()->getEditFormOptions(), $context);
         $editForm->handleRequest($context->getRequest());
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $event = new BeforeEntityUpdatedEvent($entityInstance);
             $eventDispatcher->dispatch($event);
+            /** @var User $entityInstance */
             $entityInstance = $event->getEntityInstance();
             /** @var Registry $doctrine */
             $doctrine = $this->get('doctrine');
             /** @var EntityManagerInterface $em */
             $em = $doctrine->getManagerForClass($context->getEntity()->getFqcn());
             $this->updateEntity($em, $entityInstance);
+            if (!empty($editForm->get('plainPassword')->getData())) {
+                $entityInstance->setPassword($this->passwordEncoder->encodePassword(
+                    $entityInstance,
+                    $editForm->get('plainPassword')->getData()
+                ));
+                $em->persist($entityInstance);
+                $em->flush();
+                $this->addFlash('success', 'Password updated');
+            }
 
             $eventDispatcher->dispatch(new AfterEntityUpdatedEvent($entityInstance));
 
