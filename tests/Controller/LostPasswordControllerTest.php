@@ -73,6 +73,7 @@ class LostPasswordControllerTest extends WebTestCase
 
                 $crawler = $client->request('POST', '/login', $data);
                 $crawler = $client->followRedirect();
-                $this->assertResponseRedirects('/admin');*/
+                $this->assertResponseRedirects('/admin');
+        */
     }
 }
