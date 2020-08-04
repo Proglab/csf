@@ -9,33 +9,55 @@ This challenge is to make a Wordpress like.
 ## Installation and use
 
 Create de database : 
-
+```batch
 php bin/console doctrine:database:create
+```
 
 Create the structure of the database :
-
+```batch
 php bin/console doctrine:migration:migrate
+```
 
 Laod the fixtures :
-
+```batch
 php bin/console doctrine:fixtures:load
+```
 
 You can connect to the admin with :
 
 To be a ROLE_USER :
-
-      email: 'user@csf.com'
-      password: 'user'
+```
+email: 'user@csf.com'
+password: 'user'
+```
       
 To be a ROLE_ADMIN :
-    
-      email: 'admin@csf.com'
-      password: 'admin'
+```
+email: 'admin@csf.com'
+password: 'admin'
+```
 
 To be a ROLE_SUPERADMIN :
+```
+email: 'superadmin@csf.com'
+password: 'superadmin'
+```
 
-      email: 'superadmin@csf.com'
-      password: 'superadmin'
+## Testing
+Create de database : 
+```batch
+php bin/console doctrine:database:create --env=test
+```
+
+Create the structure of the database :
+```batch
+php bin/console doctrine:migration:migrate --env=test
+```
+
+Launch tests : 
+```batch
+./vendor/bin/simple-phpunit
+```
 
 ## Contribute
 
