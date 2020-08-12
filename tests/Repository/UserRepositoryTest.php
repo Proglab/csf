@@ -29,11 +29,11 @@ class UserRepositoryTest extends KernelTestCase
     public function testUpgradePassword()
     {
         self::bootKernel();
-        $this->loadFixtures([UsersFixtures::class]);
+        $users = $this->loadFixtureFiles([__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Admin'.DIRECTORY_SEPARATOR.'UsersFixtures.yaml']);
         /** @var UserRepository $repository */
         $repository = self::$container->get(UserRepository::class);
         /** @var User $user */
-        $user = $repository->findOneBy(['email' => 'superadmin@csf.com']);
+        $user = $repository->findOneBy(['email' => $users['user_superadmin']->getEmail()]);
         $password = $user->getPassword();
         $newPassword = self::$container->get('security.password_encoder')->encodePassword(
             $user,
